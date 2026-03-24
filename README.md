@@ -63,42 +63,8 @@ Deserialises an incoming 8N1 serial stream.
 Thin wrapper that instantiates `uart_tx` and `uart_rx` with shared `CLK_FREQ` and `BAUD_RATE` parameters. Add your own FIFO or flow-control logic on top of this.
 
 ---
-
-### Run the testbench
-
-```tcl
-# Create and map a working library
-vlib work
-vmap work work
-
-# Compile all source files
-vlog uart_tx.v uart_rx.v uart_top.v uart_tb.v
-
-# Run simulation (no GUI)
-vsim -novopt work.uart_tb -do "run -all; quit"
-```
-
-```
-
-### View waveform
+### `output waveform`
+![Waveform](UART_waveform.png)
 
 
-
----
-
-## Protocol Reference — 8N1 Frame
-
-```
-Idle  Start   D0   D1   D2   D3   D4   D5   D6   D7   Stop  Idle
- ─┐     ┌────┬────┬────┬────┬────┬────┬────┬────┬────┐      ┌─
-  └─────┘    │    │    │    │    │    │    │    │    └──────┘
-  HIGH   LOW          8 data bits (LSB first)          HIGH
-```
-
-- **Line idle:** logic HIGH
-- **Start bit:** logic LOW for one bit period
-- **Data bits:** LSB first, one bit period each
-- **Stop bit:** logic HIGH for one bit period
-
----
 
